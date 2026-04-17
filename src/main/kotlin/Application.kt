@@ -1,8 +1,8 @@
 package io.illusion
 
+import features.register.configureRegisterRouter
 import features.login.configureLoginRouter
-import io.illusion.plugins.configureRouting
-import io.illusion.plugins.configureSerialization
+import io.illusion.plugins.*
 import io.ktor.server.application.*
 import io.ktor.server.cio.*
 import io.ktor.server.engine.*
@@ -16,4 +16,5 @@ fun Application.module() {
     configureSerialization()
     configureRouting()
     configureLoginRouter()
+    configureRegisterRouter()
 }
