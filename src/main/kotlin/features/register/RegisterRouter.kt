@@ -1,14 +1,25 @@
 package features.register
 
-import io.ktor.server.application.Application
-import io.ktor.server.response.respondText
-import io.ktor.server.routing.post
-import io.ktor.server.routing.routing
+import io.illusion.User
+import io.illusion.UserStorage
+import io.ktor.http.*
+import io.ktor.server.application.*
+import io.ktor.server.request.*
+import io.ktor.server.response.*
+import io.ktor.server.routing.*
 
-fun Application.configureRegisterRoutes() {
+fun Application.configureRegisterRouter() {
     routing {
-        post("/login") {
-            call.respondText { "Hello World login" }
+        post("/register") {
+            val receiveUser = call.receive<User>()
+            val isExist = UserStorage.users.any { it.login == receiveUser.login }
+
+            if (isExist) {
+                call.respond(HttpStatusCode.Conflict, "Пользователь уже существует")
+            } else {
+                UserStorage.users.add(receiveUser)
+                call.respond(HttpStatusCode.Created, "Вы успешно зарегистрировались")
+            }
         }
     }
 }
