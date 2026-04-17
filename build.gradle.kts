@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.ktor)
+    id("org.jetbrains.kotlin.plugin.serialization") version "1.9.23"
 }
 
 group = "io.illusion"
@@ -21,4 +22,6 @@ dependencies {
     implementation(libs.logback.classic)
     testImplementation(libs.ktor.server.test.host)
     testImplementation(libs.kotlin.test.junit)
+    implementation("io.ktor:ktor-serialization-kotlinx-json-jvm:2.3.12")
+    implementation("io.ktor:ktor-server-content-negotiation-jvm:2.3.12")
 }
