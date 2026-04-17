@@ -1,10 +1,8 @@
 package io.illusion
 
+import features.login.LoginReceive
 import kotlinx.serialization.Serializable
 
-@Serializable
-data class User(val login: String, val password: String)
-
 object UserStorage {
-    val users = mutableListOf<User>()
+    val users = mutableListOf<LoginReceive>()
 }

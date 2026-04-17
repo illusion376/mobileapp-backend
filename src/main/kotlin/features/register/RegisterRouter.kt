@@ -1,6 +1,6 @@
 package features.register
 
-import io.illusion.User
+import features.login.LoginReceive
 import io.illusion.UserStorage
 import io.ktor.http.*
 import io.ktor.server.application.*
@@ -11,7 +11,7 @@ import io.ktor.server.routing.*
 fun Application.configureRegisterRouter() {
     routing {
         post("/register") {
-            val receiveUser = call.receive<User>()
+            val receiveUser = call.receive<LoginReceive>()
             val isExist = UserStorage.users.any { it.login == receiveUser.login }
 
             if (isExist) {

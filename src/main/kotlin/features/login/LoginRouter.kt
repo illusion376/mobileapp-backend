@@ -1,6 +1,5 @@
 package features.login
 
-import io.illusion.User
 import io.illusion.UserStorage
 import io.ktor.http.*
 import io.ktor.server.application.*
@@ -11,7 +10,7 @@ import io.ktor.server.routing.*
 fun Application.configureLoginRouter() {
     routing {
         post("/login") {
-            val receiveUser = call.receive<User>()
+            val receiveUser = call.receive<LoginReceive>()
             val userInStorage = UserStorage.users.find {
                 it.login == receiveUser.login && it.password == receiveUser.password
             }
