@@ -1,5 +1,6 @@
 package io.illusion
 
+import features.register.configureRegisterRouter
 import features.login.configureLoginRouter
 import io.illusion.plugins.configureRouting
 import io.illusion.plugins.configureSerialization
@@ -16,4 +17,5 @@ fun Application.module() {
     configureSerialization()
     configureRouting()
     configureLoginRouter()
+    configureRegisterRouter()
 }
