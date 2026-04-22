@@ -1,6 +1,8 @@
 package io.illusion.data.repository
 
 import io.illusion.data.database.tables.Users
+import io.illusion.data.database.tables.Users.password
+import io.illusion.data.repository.models.User
 import org.jetbrains.exposed.sql.transactions.transaction
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.select
@@ -15,11 +17,17 @@ fun createUser(email: String, password: String) {
     }
 }
 
-fun findUserByEmail(email: String): Pair<Int, String>? {
+fun findUserByEmail(email: String): User? {
     return transaction {
         Users
             .select { Users.email eq email }
-            .map { it[Users.id] to it[Users.email] }
+            .map {
+                User(
+                    id = it[Users.id],
+                    email = it[Users.email],
+                    password = it[password]
+                )
+            }
             .singleOrNull()
     }
 }
