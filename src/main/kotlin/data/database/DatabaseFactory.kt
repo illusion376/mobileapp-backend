@@ -1,8 +1,8 @@
-package io.illusion.data.database
+package data.database
 
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
-import io.illusion.data.database.tables.Users
+import data.database.tables.Users
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.transactions.transaction

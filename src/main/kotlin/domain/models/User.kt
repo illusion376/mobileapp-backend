@@ -1,4 +1,4 @@
-﻿package io.illusion.data.repository.models
+﻿package domain.models
 
 data class User (
     val id: Int,

@@ -1,9 +1,9 @@
-package features.login
+package features.register
 
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class LoginReceive(
+data class RegisterReceive(
     val email: String,
     val password: String
 )

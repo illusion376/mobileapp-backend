@@ -1,8 +1,8 @@
 package features.login
 
-import io.illusion.Extensions.AuthResponse
-import io.illusion.data.repository.findUserByEmail
-import io.illusion.helpers.PasswordHasher
+import domain.repository.findUserByEmail
+import extensions.AuthResponse
+import helpers.PasswordHasher
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.request.*
@@ -15,7 +15,7 @@ fun Application.configureLoginRouter() {
             val receive = call.receive<LoginReceive>()
 
             try {
-                val userFromDb = findUserByEmail(receive.login)
+                val userFromDb = findUserByEmail(receive.email)
 
                 if (userFromDb == null) {
                     call.respond(HttpStatusCode.NotFound, AuthResponse(404, "Пользователь не найден"))
@@ -32,7 +32,7 @@ fun Application.configureLoginRouter() {
                     return@post
                 }
 
-                val isVerified = LoginService.authenticate(receive)
+                val isVerified = AuthService.authenticate(receive)
 
                 if (isVerified) {
                     call.respond(HttpStatusCode.OK, AuthResponse(200, "Вход выполнен успешно"))

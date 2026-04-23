@@ -1,9 +1,8 @@
-package io.illusion.FirebaseSettings
+package features.firebase
 
 import com.google.auth.oauth2.GoogleCredentials
 import com.google.firebase.FirebaseApp
 import com.google.firebase.FirebaseOptions
-import io.ktor.server.application.*
 
 object FirebaseConfig {
     const val WEB_API_KEY = "AIzaSyD2oaXud9EbB4uwhu5AesX5e27RVnJYEIA"

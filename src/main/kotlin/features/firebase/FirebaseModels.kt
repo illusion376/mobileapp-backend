@@ -1,4 +1,4 @@
-package io.illusion.FirebaseSettings
+package features.firebase
 
 import kotlinx.serialization.Serializable
 

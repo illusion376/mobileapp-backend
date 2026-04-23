@@ -2,10 +2,9 @@ package features.register
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserRecord
-import io.illusion.Extensions.User
-import io.illusion.FirebaseSettings.FirebaseClient
-import io.illusion.FirebaseSettings.FirebaseConfig
-import io.illusion.FirebaseSettings.FirebaseAuthResponse
+import features.firebase.FirebaseClient
+import features.firebase.FirebaseConfig
+import features.firebase.FirebaseAuthResponse
 import io.ktor.client.request.*
 import io.ktor.client.call.*
 import io.ktor.client.statement.*
@@ -19,11 +18,10 @@ data class SignUpRequest(val email: String, val password: String, val returnSecu
 data class SendOobCodeRequest(val requestType: String, val idToken: String)
 
 object RegisterService {
-
-    suspend fun registerAndSendEmail(user: User) {
+    suspend fun registerAndSendEmail(user: RegisterReceive) {
         try {
             val request = UserRecord.CreateRequest()
-                .setEmail(user.login)
+                .setEmail(user.email)
                 .setPassword(user.password)
                 .setEmailVerified(false)
             FirebaseAuth.getInstance().createUser(request)
@@ -35,7 +33,7 @@ object RegisterService {
 
         val httpResponse = FirebaseClient.httpClient.post(authUrl) {
             contentType(ContentType.Application.Json)
-            setBody(SignUpRequest(email = user.login, password = user.password))
+            setBody(SignUpRequest(email = user.email, password = user.password))
         }
 
         if (httpResponse.status.isSuccess()) {

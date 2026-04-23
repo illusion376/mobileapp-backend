@@ -1,9 +1,8 @@
-package io.illusion.helpers
+package helpers
 
 import org.mindrot.jbcrypt.BCrypt
 
 object PasswordHasher {
-
     fun hash(password: String): String {
         return BCrypt.hashpw(password, BCrypt.gensalt())
     }

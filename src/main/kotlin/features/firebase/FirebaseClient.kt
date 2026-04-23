@@ -1,4 +1,4 @@
-package io.illusion.FirebaseSettings
+﻿package features.firebase
 
 import io.ktor.client.*
 import io.ktor.client.engine.cio.*

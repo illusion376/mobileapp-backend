@@ -1,14 +1,12 @@
-package io.illusion
-
 import features.register.configureRegisterRouter
 import features.login.configureLoginRouter
-import io.illusion.data.database.DatabaseFactory
-import io.illusion.data.database.initDatabase
-import io.illusion.FirebaseSettings.FirebaseConfig
-import io.illusion.plugins.*
+import data.database.initDatabase
+import features.firebase.FirebaseConfig
 import io.ktor.server.application.*
 import io.ktor.server.cio.*
 import io.ktor.server.engine.*
+import plugins.configureRouting
+import plugins.configureSerialization
 
 fun main() {
     embeddedServer(CIO, port = 8080, host = "0.0.0.0", module = Application::module)
