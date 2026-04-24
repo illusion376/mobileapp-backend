@@ -5,7 +5,10 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class AuthResponse(
     val status: Int,
-    val message: String
+    val message: String,
+    val token: String? = null
 )
+
+
 
 
