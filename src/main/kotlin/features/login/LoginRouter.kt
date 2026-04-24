@@ -3,6 +3,7 @@ package features.login
 import domain.repository.findUserByEmail
 import extensions.AuthResponse
 import helpers.PasswordHasher
+import security.TokenService
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.request.*
@@ -35,7 +36,12 @@ fun Application.configureLoginRouter() {
                 val isVerified = AuthService.authenticate(receive)
 
                 if (isVerified) {
-                    call.respond(HttpStatusCode.OK, AuthResponse(200, "Вход выполнен успешно"))
+                    val token = TokenService.generateToken(userFromDb.email)
+
+                    call.respond(
+                        HttpStatusCode.OK,
+                        AuthResponse(200, "Вход выполнен успешно", token)
+                    )
                 } else {
                     call.respond(HttpStatusCode.Forbidden, AuthResponse(403, "Почта не подтверждена"))
                 }
