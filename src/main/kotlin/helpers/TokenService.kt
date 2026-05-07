@@ -1,8 +1,8 @@
-package security
+﻿package io.illusion.helpers
 
 import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
-import java.util.*
+import java.util.Date
 
 object TokenService {
     private const val SECRET = "winline-free_bet-3000"
@@ -18,4 +18,3 @@ object TokenService {
             .sign(Algorithm.HMAC256(SECRET))
     }
 }
-
