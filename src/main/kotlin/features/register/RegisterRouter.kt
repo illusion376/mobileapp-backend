@@ -32,7 +32,7 @@ fun Application.configureRegisterRouter() {
 
                 val hashedPassword = PasswordHasher.hash(user.password)
 
-                createUser(user.email, hashedPassword)
+                createUser(user.email, user.login, hashedPassword)
 
                 call.respond(HttpStatusCode.Created, AuthResponse(201, "На ваш email было отправлено письмо с подтверждением регистрации"))
             } catch (e: Exception) {
