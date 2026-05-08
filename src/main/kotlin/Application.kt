@@ -8,6 +8,7 @@ import io.ktor.server.cio.*
 import io.ktor.server.engine.*
 import plugins.configureRouting
 import plugins.configureSerialization
+import features.verification.configureVerificationRouter
 
 fun main() {
     embeddedServer(CIO, port = 8080, host = "185.244.51.59", module = Application::module)
@@ -21,4 +22,5 @@ fun Application.module() {
     configureRouting()
     configureLoginRouter()
     configureRegisterRouter()
+    configureVerificationRouter()
 }
