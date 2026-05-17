@@ -28,6 +28,14 @@ fun initDatabase() {
     DatabaseFactory.init()
 
     transaction {
-        SchemaUtils.create(Users)
+        SchemaUtils.create(
+            Users,
+            QuestsList,
+            WorkoutSessions,
+            DailySteps,
+            UserQuests,
+            Achievements,
+            UserAchievements
+            )
     }
 }
