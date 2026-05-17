@@ -5,20 +5,27 @@ import com.google.firebase.auth.FirebaseAuthException
 
 object FirebaseAdminService {
 
-    fun checkUserStatus(email: String): String {
+    fun checkUserStatus(email: String): UserStatus {
         return try {
             val userRecord = FirebaseAuth.getInstance().getUserByEmail(email)
             if (userRecord.isEmailVerified) {
-                "зарегистрирован"
+                UserStatus.REGISTERED
             } else {
-                "требует подтверждения"
+                UserStatus.REQUIRES_CONFIRMATION
             }
         } catch (e: FirebaseAuthException) {
             println("Firebase Auth Error: ${e.message}")
-            "не найден"
+            UserStatus.NOT_FOUNDED
         } catch (e: Exception) {
             println("General Error in FirebaseAdminService: ${e.message}")
-            "ошибка"
+            UserStatus.ERROR
         }
     }
+}
+
+enum class UserStatus{
+    REGISTERED,
+    REQUIRES_CONFIRMATION,
+    NOT_FOUNDED,
+    ERROR
 }

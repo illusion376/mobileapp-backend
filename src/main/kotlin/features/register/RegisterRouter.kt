@@ -2,8 +2,8 @@ package features.register
 
 import extensions.AuthResponse
 import extensions.isValidEmail
-import domain.repository.createUser
-import domain.repository.findUserByEmail
+import data.database.repository.createUser
+import data.database.repository.findUserByEmail
 import helpers.PasswordHasher
 import io.ktor.http.*
 import io.ktor.server.application.*

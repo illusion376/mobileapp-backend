@@ -1,6 +1,7 @@
 package features.login
 
-import domain.repository.findUserByEmail
+import data.database.repository.findUserByEmail
+import data.database.repository.isUserVerified
 import extensions.AuthResponse
 import helpers.PasswordHasher
 import io.illusion.helpers.TokenService
@@ -33,7 +34,7 @@ fun Application.configureLoginRouter() {
                     return@post
                 }
 
-                val isVerified = AuthService.authenticate(receive)
+                val isVerified = AuthService.authenticate(receive) && isUserVerified(receive.email)
 
                 if (isVerified) {
                     val token = TokenService.generateToken(userFromDb.email)

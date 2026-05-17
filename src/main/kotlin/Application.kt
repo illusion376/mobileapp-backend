@@ -1,7 +1,10 @@
 package io.illusion
+
 import features.register.configureRegisterRouter
 import features.login.configureLoginRouter
 import data.database.initDatabase
+import data.database.repository.findServerPlayerById
+import domain.models.contracts.Player
 import features.firebase.FirebaseConfig
 import io.ktor.server.application.*
 import io.ktor.server.cio.*
@@ -16,6 +19,7 @@ fun main() {
 }
 
 fun Application.module() {
+    install(io.ktor.server.sse.SSE)
     initDatabase()
     FirebaseConfig.init()
     configureSerialization()
