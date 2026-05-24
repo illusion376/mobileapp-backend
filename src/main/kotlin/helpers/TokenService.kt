@@ -9,10 +9,11 @@ object TokenService {
     public const val ISSUER = "io.illusion"
     public const val AUDIENCE = "mobile-app"
 
-    fun generateToken(email: String): String {
+    fun generateToken(userId: Int, email: String): String {
         return JWT.create()
             .withIssuer(ISSUER)
             .withAudience(AUDIENCE)
+            .withClaim("userId", userId.toString())
             .withClaim("email", email)
             .withExpiresAt(Date(System.currentTimeMillis() + 3600000 * 24))
             .sign(Algorithm.HMAC256(SECRET))

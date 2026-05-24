@@ -37,7 +37,7 @@ fun Application.configureLoginRouter() {
                 val isVerified = AuthService.authenticate(receive) && isUserVerified(receive.email)
 
                 if (isVerified) {
-                    val token = TokenService.generateToken(userFromDb.email)
+                    val token = TokenService.generateToken(userFromDb.id, userFromDb.email)
                     val userId = userFromDb.id
 
                     call.respond(
