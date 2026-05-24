@@ -12,5 +12,6 @@ object ServerPlayers : Table("server_players") {
     val stamina = integer("stamina")
     val vitality = integer("vitality")
     val steps = integer("steps")
+    val streakDays = integer("streakDays")
     override val primaryKey = PrimaryKey(id)
 }

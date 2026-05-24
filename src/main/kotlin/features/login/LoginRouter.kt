@@ -7,6 +7,7 @@ import helpers.PasswordHasher
 import io.illusion.helpers.TokenService
 import io.ktor.http.*
 import io.ktor.server.application.*
+import io.ktor.server.auth.authenticate
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
@@ -18,9 +19,8 @@ fun Application.configureLoginRouter() {
 
             try {
                 val userFromDb = findUserByEmail(receive.email)
-
                 if (userFromDb == null) {
-                    call.respond(HttpStatusCode.NotFound, AuthResponse(404, "Пользователь не найден"))
+                    call.respond(HttpStatusCode.NotFound, AuthResponse(404, null, "Пользователь не найден"))
                     return@post
                 }
 
@@ -30,29 +30,36 @@ fun Application.configureLoginRouter() {
                 )
 
                 if (!isPasswordCorrect) {
-                    call.respond(HttpStatusCode.Unauthorized, AuthResponse(401, "Неверный логин или пароль"))
+                    call.respond(HttpStatusCode.Unauthorized, AuthResponse(401, null, "Неверный логин или пароль"))
                     return@post
                 }
 
                 val isVerified = AuthService.authenticate(receive) && isUserVerified(receive.email)
 
                 if (isVerified) {
-                    val token = TokenService.generateToken(userFromDb.email)
+                    val token = TokenService.generateToken(userFromDb.id, userFromDb.email)
+                    val userId = userFromDb.id
 
                     call.respond(
                         HttpStatusCode.OK,
-                        AuthResponse(200, "Вход выполнен успешно", token)
+                        AuthResponse(200, userId, "Вход выполнен успешно", token)
                     )
                 } else {
-                    call.respond(HttpStatusCode.Forbidden, AuthResponse(403, "Почта не подтверждена"))
+                    call.respond(HttpStatusCode.Forbidden, AuthResponse(403, null, "Почта не подтверждена"))
                 }
 
             } catch (e: Exception) {
                 val message = e.message ?: "Unknown error"
                 if (message.contains("INVALID_CREDENTIALS") || message.contains("EMAIL_NOT_FOUND")) {
-                    call.respond(HttpStatusCode.Unauthorized, AuthResponse(401, "Ошибка авторизации в Firebase"))
+                    call.respond(
+                        HttpStatusCode.Unauthorized,
+                        AuthResponse(401, null, "Ошибка авторизации в Firebase")
+                    )
                 } else {
-                    call.respond(HttpStatusCode.InternalServerError, AuthResponse(500, "Ошибка сервера: $message"))
+                    call.respond(
+                        HttpStatusCode.InternalServerError,
+                        AuthResponse(500, null, "Ошибка сервера: $message")
+                    )
                 }
             }
         }
