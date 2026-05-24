@@ -10,12 +10,10 @@ object Users : Table() {
     val login = varchar("login", 255)
     val passwordHash = varchar("password", 255)
     val username = varchar("username", 255)
-    val xp = integer("xp").default(0)
-    val level = integer("level").default(1)
     val streak = integer("streak").default(0)
     val difficulty = double("difficulty").default(1.0)
     val lastActiveDate = timestamp("last_active_date").nullable()
-    val createdAccountTime = timestamp("created_account_time").defaultExpression(CurrentTimestamp)
+    val createdAccountTime = timestamp("created_account_time").defaultExpression(CurrentTimestamp())
 
     override val primaryKey = PrimaryKey(id)
 }

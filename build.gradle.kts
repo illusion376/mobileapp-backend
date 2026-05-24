@@ -23,6 +23,7 @@ dependencies {
     implementation(libs.ktor.server.cio)
     implementation(libs.logback.classic)
     implementation("io.ktor:ktor-serialization-kotlinx-json:3.4.2")
+    implementation("org.jetbrains.exposed:exposed-java-time:0.45.0")
     implementation("com.google.firebase:firebase-admin:9.2.0")
     implementation("jakarta.mail:jakarta.mail-api:2.1.2")
     implementation("org.eclipse.angus:jakarta.mail:1.1.0")
