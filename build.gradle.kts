@@ -32,6 +32,8 @@ dependencies {
     implementation("io.ktor:ktor-client-content-negotiation:2.3.10")
     implementation("io.ktor:ktor-serialization-kotlinx-json:2.3.10")
     implementation("io.ktor:ktor-server-auth-jwt-jvm:2.3.10")
+    implementation(libs.koin.ktor)
+    implementation(libs.koin.ktor.logger)
     implementation(libs.exposed.core)
     implementation(libs.exposed.dao)
     implementation(libs.exposed.jdbc)

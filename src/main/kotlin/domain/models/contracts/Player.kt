@@ -8,6 +8,7 @@ interface Player {
     val stamina : Int
     val vitality : Int
     val steps : Int
+    val streakDays : Int
     fun clone(
         userId: Int = this.userId,
         level: Int = this.level,
@@ -15,6 +16,7 @@ interface Player {
         strength: Int = this.strength,
         stamina: Int = this.stamina,
         vitality: Int = this.vitality,
-        steps: Int = this.steps
+        steps: Int = this.steps,
+        streakDays : Int = this.streakDays
     ): Player
 }

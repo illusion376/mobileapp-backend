@@ -17,13 +17,13 @@ fun Application.configureRegisterRouter() {
             val user = call.receive<RegisterReceive>()
 
             if (!user.email.isValidEmail()) {
-                call.respond(HttpStatusCode.BadRequest, AuthResponse(400, "Неверный формат почты"))
+                call.respond(HttpStatusCode.BadRequest, AuthResponse(400, null,"Неверный формат почты"))
                 return@post
             }
 
             val existingUser = findUserByEmail(user.email)
             if (existingUser != null) {
-                call.respond(HttpStatusCode.Conflict, AuthResponse(409, "Пользователь уже с таким email существует"))
+                call.respond(HttpStatusCode.Conflict, AuthResponse(409, null,"Пользователь уже с таким email существует"))
                 return@post
             }
 
@@ -34,9 +34,9 @@ fun Application.configureRegisterRouter() {
 
                 createUser(user.email, user.login, hashedPassword)
 
-                call.respond(HttpStatusCode.Created, AuthResponse(201, "На ваш email было отправлено письмо с подтверждением регистрации"))
+                call.respond(HttpStatusCode.Created, AuthResponse(201, null,"На ваш email было отправлено письмо с подтверждением регистрации"))
             } catch (e: Exception) {
-                call.respond(HttpStatusCode.InternalServerError, AuthResponse(500, "Ошибка: ${e.message}"))
+                call.respond(HttpStatusCode.InternalServerError, AuthResponse(500, null, "Ошибка: ${e.message}"))
             }
         }
     }

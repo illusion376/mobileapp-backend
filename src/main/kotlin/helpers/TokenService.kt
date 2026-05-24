@@ -5,9 +5,9 @@ import com.auth0.jwt.algorithms.Algorithm
 import java.util.Date
 
 object TokenService {
-    private const val SECRET = "winline-free_bet-3000"
-    private const val ISSUER = "io.illusion"
-    private const val AUDIENCE = "mobile-app"
+    public const val SECRET = "winline-free_bet-3000"
+    public const val ISSUER = "io.illusion"
+    public const val AUDIENCE = "mobile-app"
 
     fun generateToken(email: String): String {
         return JWT.create()

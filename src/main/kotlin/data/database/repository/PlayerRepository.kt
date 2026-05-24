@@ -32,6 +32,7 @@ fun createServerPlayer(userId: Int) {
         it[ServerPlayers.stamina] = 1
         it[ServerPlayers.vitality] = 1
         it[ServerPlayers.steps] = 0
+        it[ServerPlayers.streakDays] = 0
     }
 }
 
@@ -57,6 +58,7 @@ fun findServerPlayerById(userId: Int): ServerPlayer? {
                     stamina = it[ServerPlayers.stamina],
                     vitality = it[ServerPlayers.vitality],
                     steps = it[ServerPlayers.steps],
+                    streakDays = it[ServerPlayers.streakDays]
                 )
             }
             .singleOrNull()
@@ -80,6 +82,7 @@ fun updateServerPlayer(player: Player) {
             it[stamina] = player.stamina
             it[vitality] = player.vitality
             it[steps] = player.steps
+            it[streakDays] = player.streakDays
         }
     }
 }
