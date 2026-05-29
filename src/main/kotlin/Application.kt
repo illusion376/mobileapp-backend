@@ -2,7 +2,7 @@ package io.illusion
 
 import features.register.configureRegisterRouter
 import features.login.configureLoginRouter
-import quests.questRoutes
+import quests.questRouter
 import data.database.initDatabase
 import data.database.repository.findServerPlayerById
 import domain.models.contracts.Player
@@ -29,5 +29,5 @@ fun Application.module() {
     configureLoginRouter()
     configureRegisterRouter()
     configureVerificationRouter()
-    routing {questRoutes()}
+    routing {questRouter()}
 }
