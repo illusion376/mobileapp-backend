@@ -2,6 +2,9 @@ package data.database
 
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
+import data.database.tables.PlayerQuests
+import data.database.tables.QuestTemplates
+import data.database.tables.WorkoutSessions
 import data.database.tables.ServerPlayers
 import data.database.tables.Users
 import org.jetbrains.exposed.sql.Database
@@ -31,5 +34,8 @@ fun initDatabase() {
     transaction {
         SchemaUtils.create(Users)
         SchemaUtils.create(ServerPlayers)
+        SchemaUtils.create(PlayerQuests)
+        SchemaUtils.create(QuestTemplates)
+        SchemaUtils.create(WorkoutSessions)
     }
 }

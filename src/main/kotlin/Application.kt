@@ -2,6 +2,7 @@ package io.illusion
 
 import features.register.configureRegisterRouter
 import features.login.configureLoginRouter
+import quests.configureQuestRouter
 import data.database.initDatabase
 import data.database.repository.findServerPlayerById
 import domain.models.contracts.Player
@@ -12,6 +13,8 @@ import io.ktor.server.engine.*
 import plugins.configureRouting
 import plugins.configureSerialization
 import features.verification.configureVerificationRouter
+import io.ktor.server.routing.routing
+import quests.configureQuestRouter
 import io.illusion.di.serverModule
 import io.illusion.features.authentication.configureSecurity
 import io.illusion.features.data.configureDataRouter
@@ -39,5 +42,6 @@ fun Application.module() {
     configureLoginRouter()
     configureRegisterRouter()
     configureVerificationRouter()
+    configureQuestRouter()
     configureDataRouter()
 }
