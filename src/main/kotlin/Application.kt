@@ -2,7 +2,7 @@ package io.illusion
 
 import features.register.configureRegisterRouter
 import features.login.configureLoginRouter
-import quests.questRouter
+import quests.configureQuestRouter
 import data.database.initDatabase
 import data.database.repository.findServerPlayerById
 import domain.models.contracts.Player
@@ -14,6 +14,7 @@ import plugins.configureRouting
 import plugins.configureSerialization
 import features.verification.configureVerificationRouter
 import io.ktor.server.routing.routing
+import quests.configureQuestRouter
 
 fun main() {
     embeddedServer(CIO, port = 8080, host = "185.244.51.59", module = Application::module)
@@ -29,5 +30,5 @@ fun Application.module() {
     configureLoginRouter()
     configureRegisterRouter()
     configureVerificationRouter()
-    routing {questRouter()}
+    configureQuestRouter()
 }
