@@ -15,6 +15,11 @@ import plugins.configureSerialization
 import features.verification.configureVerificationRouter
 import io.ktor.server.routing.routing
 import quests.configureQuestRouter
+import io.illusion.di.serverModule
+import io.illusion.features.authentication.configureSecurity
+import io.illusion.features.data.configureDataRouter
+import org.koin.ktor.plugin.Koin
+import org.koin.logger.slf4jLogger
 
 fun main() {
     embeddedServer(CIO, port = 8080, host = "185.244.51.59", module = Application::module)
@@ -23,7 +28,14 @@ fun main() {
 
 fun Application.module() {
     install(io.ktor.server.sse.SSE)
+
+    install(Koin) {
+        slf4jLogger()
+        modules(serverModule)
+    }
+
     initDatabase()
+    configureSecurity()
     FirebaseConfig.init()
     configureSerialization()
     configureRouting()
@@ -31,4 +43,5 @@ fun Application.module() {
     configureRegisterRouter()
     configureVerificationRouter()
     configureQuestRouter()
+    configureDataRouter()
 }

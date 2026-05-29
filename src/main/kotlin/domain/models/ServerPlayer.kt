@@ -1,7 +1,9 @@
 ﻿package domain.models
 
 import domain.models.contracts.Player
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class ServerPlayer(
     override val userId: Int,
     override val level: Int,
@@ -9,7 +11,8 @@ data class ServerPlayer(
     override val strength: Int,
     override val stamina: Int,
     override val vitality: Int,
-    override val steps: Int
+    override val steps: Int,
+    override val streakDays: Int
 ) : Player {
     override fun clone(
         userId: Int,
@@ -18,7 +21,8 @@ data class ServerPlayer(
         strength: Int,
         stamina: Int,
         vitality: Int,
-        steps: Int
+        steps: Int,
+        streakDays: Int
     ): Player {
         return this.copy(
             userId = userId,
@@ -27,7 +31,8 @@ data class ServerPlayer(
             strength = strength,
             stamina = stamina,
             vitality = vitality,
-            steps = steps
+            steps = steps,
+            streakDays = streakDays
         )
     }
 }
